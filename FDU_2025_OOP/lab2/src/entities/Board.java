@@ -9,5 +9,9 @@ public class Board {
                 board[i][j] = Piece.EMPTY;
             }
         }
+        board[4][5] = Piece.BLACK;
+        board[5][4] = Piece.BLACK;
+        board[4][4] = Piece.WHITE;
+        board[5][5] = Piece.WHITE;
     }
 }
