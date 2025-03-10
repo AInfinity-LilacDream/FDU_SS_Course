@@ -3,9 +3,11 @@ package entities;
 public class Board {
     public Piece[][] board = new Piece[9][9];
     public Player currentPlayer;
+    public int id;
 
-    public void init(Player player) {
+    public void init(Player player, int id) {
         currentPlayer = player;
+        this.id = id;
 
         for (int i = 1; i <= 8; ++i) {
             for (int j = 1; j <= 8; ++j) {

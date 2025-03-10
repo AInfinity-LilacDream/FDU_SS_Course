@@ -18,9 +18,9 @@ public class game {
         Board board1 = new Board();
         Board board2 = new Board();
         Board board3 = new Board();
-        board1.init(player1);
-        board2.init(player1);
-        board3.init(player1);
+        board1.init(player1, 1);
+        board2.init(player1, 2);
+        board3.init(player1, 3);
 
         mainLoop(player1, player2, board1, board2, board3);
     }
@@ -237,12 +237,15 @@ public class game {
                         System.out.print("· ");
                 }
             }
-            if (i == 4) {
+            if (i == 3) {
+                System.out.printf("\t\t棋盘%d", board1.id);
+            }
+            if (i == 5) {
                 System.out.printf("\t\t玩家[%s]", player1.getName());
                 if (currentPlayer == player1) {
                     System.out.println(" ○");
                 } else System.out.println();
-            } else if (i == 5) {
+            } else if (i == 6) {
                 System.out.printf("\t\t玩家[%s]", player2.getName());
                 if (currentPlayer == player2) {
                     System.out.println(" ●");

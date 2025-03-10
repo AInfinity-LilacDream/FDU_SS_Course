@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00d69b1a-28a6-47a3-a2e5-9e4c3be6e53c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../lab2/实验报告.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entities/Board.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entities/Piece.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entities/Player.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab2/src/entities/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/src/entities/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab2/src/game.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/src/game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab2/src/game.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/src/game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/实验报告.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1741573113502</updated>
       <workItem from="1741573114569" duration="261000" />
-      <workItem from="1741573466704" duration="1872000" />
+      <workItem from="1741573466704" duration="2703000" />
     </task>
     <servers />
   </component>
