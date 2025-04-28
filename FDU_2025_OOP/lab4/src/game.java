@@ -267,8 +267,8 @@ public class game {
 
     // after a move is performed, update the whole board1
     static boolean updateBoard(Board board1, int x, int y) {
-        Piece currentPiece = Objects.equals(board1.currentPlayer.getName(), "张三") ? Piece.BLACK : Piece.WHITE;
-        Piece oppositePiece = Objects.equals(board1.currentPlayer.getName(), "张三") ? Piece.WHITE : Piece.BLACK;
+        Piece currentPiece = Objects.equals(board1.currentPlayer.getName(), "Tom") ? Piece.BLACK : Piece.WHITE;
+        Piece oppositePiece = Objects.equals(board1.currentPlayer.getName(), "Tom") ? Piece.WHITE : Piece.BLACK;
 
         boolean flipFlag = false;
 
