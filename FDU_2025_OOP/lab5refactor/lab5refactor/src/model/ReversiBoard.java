@@ -9,34 +9,38 @@ public class ReversiBoard extends Board {
 
     @Override
     public void initBoard() {
-        for (int i = 1; i <= 8; ++i) {
-            for (int j = 1; j <= 8; ++j) {
+        setRow(8);
+        setCol(8);
+        for (int i = 1; i <= getRow(); ++i) {
+            for (int j = 1; j <= getCol(); ++j) {
                 board[i][j] = Piece.Empty;
             }
         }
         board[4][4] = board[5][5] = Piece.White;
         board[4][5] = board[5][4] = Piece.Black;
         board[3][4] = board[4][3] = board[5][6] = board[6][5] = Piece.LEGAL;
+
+        setLegalPositionCount(4);
     }
 
     @Override
     public int checkGameEnd() {
         int whiteScore = 0, blackScore = 0;
 
-        for (int i = 1; i <= 8; ++i) {
-            for (int j = 1; j <= 8; ++j) {
+        for (int i = 1; i <= getRow(); ++i) {
+            for (int j = 1; j <= getCol(); ++j) {
                 if (isValidMove(Piece.Black, i, j)) return Constant.running;
             }
         }
 
-        for (int i = 1; i <= 8; ++i) {
-            for (int j = 1; j <= 8; ++j) {
+        for (int i = 1; i <= getRow(); ++i) {
+            for (int j = 1; j <= getCol(); ++j) {
                 if (isValidMove(Piece.White, i, j)) return Constant.running;
             }
         }
 
-        for (int i = 1; i <= 8; ++i) {
-            for (int j = 1; j <= 8; ++j) {
+        for (int i = 1; i <= getRow(); ++i) {
+            for (int j = 1; j <= getCol(); ++j) {
                 if (board[i][j] == Piece.White) {
                     whiteScore++;
                 }
@@ -65,8 +69,7 @@ public class ReversiBoard extends Board {
     }
 
     private boolean isValidMove(Piece current, int cx, int cy) {
-
-        if (board[cx][cy] != Piece.Empty) return false;
+        if (board[cx][cy] != Piece.Empty && board[cx][cy] != Piece.LEGAL) return false;
 
         Piece opponent = (current == Piece.Black ? Piece.White : Piece.Black);
 
@@ -79,14 +82,14 @@ public class ReversiBoard extends Board {
             int y = cy + dy[dir];
             boolean foundOpponentBetween = false;
 
-            while (x >= 0 && x < 8 && y >= 0 && y < 8 && board[x][y] == opponent) {
+            while (x >= 1 && x <= getRow() && y >= 1 && y <= getCol() && board[x][y] == opponent) {
                 x += dx[dir];
                 y += dy[dir];
                 foundOpponentBetween = true;
             }
 
             // 如果最终遇到自己的棋子，说明可以吃掉中间的对手棋子
-            if (x >= 0 && x < 8 && y >= 0 && y < 8 && board[x][y] == current && foundOpponentBetween) {
+            if (x >= 1 && x <= getRow() && y >= 1 && y <= getCol() && board[x][y] == current && foundOpponentBetween) {
                 return true;
             }
         }
@@ -97,10 +100,9 @@ public class ReversiBoard extends Board {
     public void updateLegalPosition(Piece current) {
         clearLegalPosition();
 
-        for (int i = 1; i <= 8; ++i) {
-            for (int j = 1; j <= 8; ++j) {
+        for (int i = 1; i <= getRow(); ++i) {
+            for (int j = 1; j <= getCol(); ++j) {
                 if (isValidMove(current, i, j)) {
-                    System.out.println("hehe");
                     board[i][j] = Piece.LEGAL;
                     legalPositionCount++;
                 }
@@ -109,12 +111,13 @@ public class ReversiBoard extends Board {
     }
 
     private void clearLegalPosition() {
-        for (int i = 1; i <= 8; ++i) {
-            for (int j = 1; j<= 8; ++j) {
+        for (int i = 1; i <= getRow(); ++i) {
+            for (int j = 1; j<= getCol(); ++j) {
                 if (board[i][j] == Piece.LEGAL) {
                     board[i][j] = Piece.Empty;
                 }
             }
         }
+        setLegalPositionCount(0);
     }
 }

@@ -2,11 +2,12 @@ package model;
 
 public abstract class Board {
     protected Piece[][] board;
+    private int row, col;
 
     public abstract void initBoard();
 
     public Board() {
-        board = new Piece[9][9];
+        board = new Piece[19][19];
         initBoard();
     }
 
@@ -16,6 +17,22 @@ public abstract class Board {
     // 1 - Tom
     // 2 - Jerry
     public abstract int checkGameEnd();
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
 
     public Piece[][] getBoard() {
         return board;

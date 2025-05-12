@@ -18,17 +18,25 @@ public class Renderer {
     private GameController[] gameList;
     private int currentRound;
     private int blackScore, whiteScore;
+    private int row, col;
+    private int blackBombCount, whiteBombCount;
 
 
     public void setGameList(GameController[] gameList) {
         this.gameList = gameList;
-        this.currentBoard = gameList[currentGameID].getBoard();
-        this.currentPlayer = gameList[currentGameID].getCurrentPlayer();
-        this.alternatePlayer = gameList[currentGameID].getAlternatePlayer();
-        this.gameType = gameList[currentGameID].getGameType();
-        this.currentRound = gameList[currentGameID].getCurrentRound();
-        this.blackScore = gameList[currentGameID].getBlackScore();
-        this.whiteScore = gameList[currentGameID].getWhiteScore();
+
+        GameController currentGame = gameList[currentGameID];
+        this.currentBoard = currentGame.getBoard();
+        this.currentPlayer = currentGame.getCurrentPlayer();
+        this.alternatePlayer = currentGame.getAlternatePlayer();
+        this.gameType = currentGame.getGameType();
+        this.currentRound = currentGame.getCurrentRound();
+        this.blackScore = currentGame.getBlackScore();
+        this.whiteScore = currentGame.getWhiteScore();
+        this.row = currentGame.getRow();
+        this.col = currentGame.getCol();
+        this.blackBombCount = currentGame.getBlackBombCount();
+        this.whiteBombCount = currentGame.getWhiteBombCount();
     }
 
     public void setCurrentGameID(int id) {
@@ -61,6 +69,9 @@ public class Renderer {
         if (Objects.equals(gameType, Constant.Reversi)) {
             System.out.printf("请玩家[%s]输入落子位置(1a) / 游戏编号(1-%d) / 新游戏类型(peace/reversi/gomoku) / 退出程序(quit):", currentPlayer.getName(), gameTotal);
         }
+        else if (Objects.equals(gameType, Constant.Gomoku)) {
+            System.out.printf("请玩家[%s]输入落子位置(1a) / 游戏编号(1-%d) / 新游戏类型(peace/reversi/gomoku) / 炸弹(bomb) / 放弃行棋(pass) / 退出程序(quit):", currentPlayer.getName(), gameTotal);
+        }
         else {
             System.out.printf("请玩家[%s]输入落子位置(1a) / 游戏编号(1-%d) / 新游戏类型(peace/reversi/gomoku) / 放弃行棋(pass) / 退出程序(quit):", currentPlayer.getName(), gameTotal);
         }
@@ -76,16 +87,16 @@ public class Renderer {
 
     private void renderPeace(int gameTotal) {
         System.out.print("  ");
-        for (char i = 'A'; i <= 'H'; ++i) {
+        for (char i = 'A'; i <= 'A' + row - 1; ++i) {
             System.out.print(i + " ");
         }
         System.out.println();
 
-        for (int i = 1; i <= Math.max(8, 2 + gameTotal); ++i) {
+        for (int i = 1; i <= Math.max(row, 2 + gameTotal); ++i) {
             // board row
-            if (i <= 8) {
+            if (i <= row) {
                 System.out.print(i + " ");
-                for (int j = 1; j <= 8; ++j) {
+                for (int j = 1; j <= col; ++j) {
                     switch (currentBoard[i][j]) {
                         case Piece.Black:
                             System.out.print("○ ");
@@ -116,14 +127,14 @@ public class Renderer {
                 case 5:
                     System.out.printf("\tPlayer2 [%s]", Constant.name2P);
                     if (Objects.equals(currentPlayer.getName(), Constant.name2P)) {
-                        System.out.print("   ●\t");
+                        System.out.print(" ●\t");
                     }
                     else {
                         System.out.print("\t\t");
                     }
                     break;
                 default:
-                    System.out.print(i > 8 ? "\t\t\t\t\t\t" : "\t\t\t\t");
+                    System.out.print(i > row ? "\t\t\t\t\t\t" : "\t\t\t\t");
                     break;
             }
 
@@ -140,18 +151,18 @@ public class Renderer {
         }
     }
 
-    private  void renderReversi(int gameTotal) {
+    private void renderReversi(int gameTotal) {
         System.out.print("  ");
-        for (char i = 'A'; i <= 'H'; ++i) {
+        for (char i = 'A'; i <= 'A' + row - 1; ++i) {
             System.out.print(i + " ");
         }
         System.out.println();
 
-        for (int i = 1; i <= Math.max(8, 2 + gameTotal); ++i) {
+        for (int i = 1; i <= Math.max(row, 2 + gameTotal); ++i) {
             // board row
-            if (i <= 8) {
+            if (i <= row) {
                 System.out.print(i + " ");
-                for (int j = 1; j <= 8; ++j) {
+                for (int j = 1; j <= col; ++j) {
                     switch (currentBoard[i][j]) {
                         case Piece.Black:
                             System.out.print("○ ");
@@ -192,7 +203,7 @@ public class Renderer {
                     }
                     break;
                 default:
-                    System.out.print(i > 8 ? "\t\t\t\t\t\t" : "\t\t\t\t");
+                    System.out.print(i > row ? "\t\t\t\t\t\t" : "\t\t\t\t");
                     break;
             }
 
@@ -211,16 +222,16 @@ public class Renderer {
 
     private void renderGomoku(int gameTotal) {
         System.out.print("  ");
-        for (char i = 'A'; i <= 'H'; ++i) {
+        for (char i = 'A'; i <= 'A' + row - 1; ++i) {
             System.out.print(i + " ");
         }
         System.out.println();
 
-        for (int i = 1; i <= Math.max(8, 2 + gameTotal); ++i) {
+        for (int i = 1; i <= Math.max(row, 2 + gameTotal); ++i) {
             // board row
-            if (i <= 8) {
-                System.out.print(i + " ");
-                for (int j = 1; j <= 8; ++j) {
+            if (i <= row) {
+                System.out.print(i <= 9 ? i + " " : (char)('A' + i - 10) + " ");
+                for (int j = 1; j <= col; ++j) {
                     switch (currentBoard[i][j]) {
                         case Piece.Black:
                             System.out.print("○ ");
@@ -230,6 +241,12 @@ public class Renderer {
                             break;
                         case Piece.Empty:
                             System.out.print(". ");
+                            break;
+                        case Piece.BARRIER:
+                            System.out.print("# ");
+                            break;
+                        case Piece.BOMB:
+                            System.out.print("@ ");
                     }
                 }
             }
@@ -251,7 +268,7 @@ public class Renderer {
                 case 5:
                     System.out.printf("\tPlayer2 [%s]", Constant.name2P);
                     if (Objects.equals(currentPlayer.getName(), Constant.name2P)) {
-                        System.out.print("   ●\t");
+                        System.out.print(" ●\t");
                     }
                     else {
                         System.out.print("\t\t");
@@ -261,11 +278,26 @@ public class Renderer {
                     System.out.printf("\tCurrent Round: %d\t", currentRound);
                     break;
                 default:
-                    System.out.print(i > 8 ? "\t\t\t\t\t\t" : "\t\t\t\t");
+                    System.out.print(i > row ? "\t\t\t\t\t\t\t\t" : "\t\t\t\t");
                     break;
             }
 
             // 3rd column
+            switch (i) {
+                case 3:
+                    System.out.print("Bombs\t");
+                    break;
+                case 4:
+                    System.out.printf("  %d\t", blackBombCount);
+                    break;
+                case 5:
+                    System.out.printf("  %d\t", whiteBombCount);
+                    break;
+                default:
+                    System.out.print("\t");
+            }
+
+            // 4th column
             if (i == 2) {
                 System.out.println("Game List");
             }
